@@ -32,8 +32,9 @@ export const Containertitle = styled.div`
   margin-bottom: 10px;
 `;
 
-export const ContainerHeader = styled.div`
+export const Container = styled.div`
   padding: 12px 12px 24px;
+  height: 100vh;
 `;
 export const SearchWrapper = styled.div`
   display: flex;
@@ -61,6 +62,40 @@ export const InputSearch = styled.input`
   width: 100%;
   border: none;
   outline: none;
+`;
+
+export const ContainerCards = styled.div`
+  height: 82vh;
+  padding: 24px 20px 0px 20px;
+  margin: auto;
+  margin-top: 24px;
+  border-radius: 8px;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.25) inset;
+  background-color: ${colors.grayscale.white};
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${colors.primary};
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: brown;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: none;
+  }
+`;
+
+export const ContainerWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
 `;
 
 export const SortInput = styled.input``;

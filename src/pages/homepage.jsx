@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 import { MdHeight, MdSearch } from "react-icons/md";
 import {
-  ContainerHeader,
+  ContainerCards,
+  Container,
   Containertitle,
+  ContainerWrap,
   SpaceBetweenRow,
   InputSearch,
   SearchWrapper,
@@ -11,11 +13,12 @@ import {
 } from "../components/utils";
 import { TbPokeball } from "react-icons/tb";
 import { colors } from "../styles/colors";
+import PokeCard from "../components/poke-card";
 
 function HomePage() {
   return (
     <div>
-      <ContainerHeader>
+      <Container>
         <Containertitle>
           <TbPokeball
             style={{ color: "white", width: "30px", height: "30px" }}
@@ -39,8 +42,39 @@ function HomePage() {
             AB
           </button>
         </SpaceBetweenRow>
-        <PokemonType color={"yellow"}>Fire</PokemonType>
-      </ContainerHeader>
+        <ContainerCards>
+          <ContainerWrap>
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+            <PokeCard />
+          </ContainerWrap>
+        </ContainerCards>
+      </Container>
     </div>
   );
 }
