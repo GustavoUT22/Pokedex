@@ -68,7 +68,7 @@ export const ContainerCards = styled.div`
   height: 82vh;
   padding: 24px 20px 0px 20px;
   margin: auto;
-  margin-top: 24px;
+  margin-top: 20px;
   border-radius: 8px;
   box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.25) inset;
   background-color: ${colors.grayscale.white};
@@ -98,4 +98,41 @@ export const ContainerWrap = styled.div`
   align-items: flex-start;
 `;
 
+export const Button = styled.div`
+  display: flex;
+  width: 258px;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+  background: ${colors.grayscale.light};
+`;
+
 export const SortInput = styled.input``;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+`;
+
+export const ContainerForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  margin-top: 80px;
+`;
+
+export const Welcome = styled.span`
+  width: 225px;
+  color: ${colors.grayscale.white};
+  text-align: center;
+  font-family: Poppins;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px; /* 133.333% */
+`;
