@@ -1,16 +1,10 @@
-import HomePage from "./pages/homepage";
-import LoginPage from "./pages/login-page";
-import SignupPage from "./pages/signup-page";
-import PokeCard from "./components/poke-card";
-import PokeDetail from "./pages/pokedetail";
-import { ContainerApp } from "./components/utils";
-
+import AuthenticateApp from "./authenticate";
+import UnauthenticateApp from "./unanthenticate";
+import { useAuth } from "./context/auth-context";
 function App() {
-  return (
-    <>
-      <PokeDetail />
-    </>
-  );
+  const { user } = useAuth();
+
+  return <>{user ? <AuthenticateApp /> : <UnauthenticateApp />}</>;
 }
 
 export default App;
