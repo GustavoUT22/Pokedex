@@ -21,12 +21,15 @@ const StyledInput = styled.input`
   outline: none;
   border-radius: 10px;
   background-color: ${colors.grayscale.white};
+  ::placeholder {
+    color: ${colors.grayscale.light};
+  }
 `;
 
-function Input({ label, type, name, value = "", placeholder }) {
+function Input({ label, type = "", name, value = "", placeholder }) {
   return (
     <div>
-      <StyledLabel>{label}</StyledLabel>
+      {label ? <StyledLabel>{label}</StyledLabel> : ""}
       <StyledInput
         type={type}
         name={name}
