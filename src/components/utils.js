@@ -98,7 +98,7 @@ export const ContainerWrap = styled.div`
   align-items: flex-start;
 `;
 
-export const Button = styled.div`
+export const Button = styled.button`
   display: flex;
   width: 258px;
   padding: 8px 16px;

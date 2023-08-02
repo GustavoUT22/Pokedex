@@ -26,14 +26,24 @@ const StyledInput = styled.input`
   }
 `;
 
-function Input({ label, type = "", name, value = "", placeholder }) {
+function Input({
+  id,
+  type = "text",
+  name,
+  value,
+  onChange,
+  placeholder,
+  label,
+}) {
   return (
     <div>
-      {label ? <StyledLabel>{label}</StyledLabel> : ""}
+      {label ? <StyledLabel htmlFor={id || name}>{label}</StyledLabel> : ""}
       <StyledInput
+        id={id || name}
         type={type}
         name={name}
         value={value}
+        onChange={onChange}
         placeholder={placeholder}
       />
     </div>
