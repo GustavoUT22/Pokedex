@@ -25,18 +25,20 @@ export const Title = styled.h1`
   line-height: 32px;
 `;
 
-export const Containertitle = styled.div`
+export const Containertitle = styled.header`
   display: flex;
   flex-direction: row;
   gap: 16px;
   margin-bottom: 10px;
 `;
 
-export const Container = styled.div`
-  padding: 12px 12px 24px;
-  height: 100vh;
+export const Container = styled.section`
+  padding: 12px 12px 4px;
+  height: 94vh;
+  max-width: 1000px;
+  margin: auto;
 `;
-export const SearchWrapper = styled.div`
+export const SearchWrapper = styled.form`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -65,8 +67,8 @@ export const InputSearch = styled.input`
 `;
 
 export const ContainerCards = styled.div`
-  height: 82vh;
-  padding: 24px 20px 0px 20px;
+  height: 80vh;
+  padding: 24px 10px 0px 10px;
   margin: auto;
   margin-top: 20px;
   border-radius: 8px;
