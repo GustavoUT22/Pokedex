@@ -15,8 +15,36 @@ import {
 import { TbPokeball } from "react-icons/tb";
 import { colors } from "../styles/colors";
 import PokeCard from "../components/poke-card";
+import { useState } from "react";
+import { getPokemon } from "../services/pokemon-services";
+
+const SearchButton = styled.button`
+  border: none;
+  border-radius: 16px;
+  background-color: ${colors.primary};
+  color: white;
+  padding: 2px 10px;
+  :hover {
+    background-color: #c63b3e;
+  }
+  :focus {
+    opacity: 0.7;
+  }
+`;
 
 function HomePage() {
+  const [query, setQuery] = useState("");
+  const [status] = useState(null);
+
+  function handleChange(event) {
+    setQuery(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    getPokemon(query).then(console.log);
+  }
+
   return (
     <Container>
       <Containertitle>
@@ -24,7 +52,7 @@ function HomePage() {
         <Title>Pokédex</Title>
       </Containertitle>
       <SpaceBetweenRow>
-        <SearchWrapper>
+        <SearchWrapper onSubmit={handleSubmit}>
           <MdSearch
             style={{
               width: "16px",
@@ -32,7 +60,13 @@ function HomePage() {
               color: `${colors.primary}`,
             }}
           />
-          <InputSearch type="text" placeholder="search" />
+          <InputSearch
+            type="text"
+            placeholder="pokemon"
+            name="pokemon"
+            onChange={handleChange}
+          />
+          <SearchButton>Search</SearchButton>
         </SearchWrapper>
         <button style={{ borderRadius: "50%", border: "none", padding: "8px" }}>
           AB
