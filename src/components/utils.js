@@ -37,6 +37,7 @@ export const Container = styled.section`
   height: 94vh;
   max-width: 1000px;
   margin: auto;
+  background-color: ${colors.primary};
 `;
 export const SearchWrapper = styled.form`
   display: flex;
