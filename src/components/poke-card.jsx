@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import { colors } from "../styles/colors";
 import PokeBackground from "../assets/pokebackground.png";
+import { useAsyncError, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getPokemon } from "../services/pokemon-services";
 
 const PokeCardWrapper = styled.div`
   display: flex;
@@ -62,15 +65,30 @@ const PokeCardName = styled.div`
   line-height: 16px; /* 160% */
 `;
 
-function PokeCard() {
+function PokeCard({ pokeName }) {
+  const [pokemon, setPokemon] = useState(null);
+
+  useEffect(() => {
+    getPokemon(pokeName).then(setPokemon).catch(console.log);
+  }, []);
+
+  const idStr = pokemon?.id.toString();
+  const pokeNumber =
+    idStr?.length > 2
+      ? `#${idStr}`
+      : idStr?.length > 1
+      ? `#0${idStr}`
+      : `#00${idStr}`;
   return (
     <PokeCardWrapper>
       <PokeCardNumber>
-        <PokeNumber>#999</PokeNumber>
+        <PokeNumber>{pokeNumber}</PokeNumber>
       </PokeCardNumber>
-      <PokeBackgroundImg src={PokeBackground} />
+      <PokeBackgroundImg
+        src={pokemon?.sprites.other["official-artwork"].front_default}
+      />
       <PokeCardNameWrapper>
-        <PokeCardName>Pókemon name</PokeCardName>
+        <PokeCardName>{pokeName}</PokeCardName>
       </PokeCardNameWrapper>
     </PokeCardWrapper>
   );

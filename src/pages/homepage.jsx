@@ -15,8 +15,8 @@ import {
 import { TbPokeball } from "react-icons/tb";
 import { colors } from "../styles/colors";
 import PokeCard from "../components/poke-card";
-import { useState } from "react";
-import { getPokemon } from "../services/pokemon-services";
+import { useEffect, useState } from "react";
+import { getPokemon, getPokemons } from "../services/pokemon-services";
 
 const SearchButton = styled.button`
   border: none;
@@ -34,7 +34,17 @@ const SearchButton = styled.button`
 
 function HomePage() {
   const [query, setQuery] = useState("");
-  const [status] = useState(null);
+  const [pokemons, setPokemons] = useState(null);
+  const [status, setStatus] = useState({
+    status: "idle",
+    data: null,
+    error: null,
+  });
+
+  useEffect(() => {
+    getPokemons().then(setPokemons).catch(console.log);
+  }, []);
+  // console.log(pokemons);
 
   function handleChange(event) {
     setQuery(event.target.value);
@@ -74,25 +84,12 @@ function HomePage() {
       </SpaceBetweenRow>
       <ContainerCards>
         <ContainerWrap>
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
-          <PokeCard />
+          {status.status === "idle" &&
+            pokemons &&
+            pokemons.results.map((pokemon, index) => (
+              <PokeCard key={`poke-${index}`} pokeName={pokemon?.name} />
+            ))}
+          {status.status === "pending" && <h2>pending...</h2>}
         </ContainerWrap>
       </ContainerCards>
     </Container>
