@@ -15,6 +15,7 @@ import {
 import { TbPokeball } from "react-icons/tb";
 import { colors } from "../styles/colors";
 import PokeCard from "../components/poke-card";
+import PokeDetail from "./pokedetail";
 import { useEffect, useState } from "react";
 import { getPokemon, getPokemons } from "../services/pokemon-services";
 
@@ -52,11 +53,14 @@ function HomePage() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    getPokemon(query).then(console.log);
+    getPokemon(query).then((data) =>
+      setStatus({ status: "active", data, error: null }).catch(console.log)
+    );
   }
 
   return (
     <Container>
+      {/* {status.status === "active" && <PokeDetail pokeData={status.data} />} */}
       <Containertitle>
         <TbPokeball style={{ color: "white", width: "30px", height: "30px" }} />
         <Title>Pokédex</Title>
@@ -89,7 +93,6 @@ function HomePage() {
             pokemons.results.map((pokemon, index) => (
               <PokeCard key={`poke-${index}`} pokeName={pokemon?.name} />
             ))}
-          {status.status === "pending" && <h2>pending...</h2>}
         </ContainerWrap>
       </ContainerCards>
     </Container>

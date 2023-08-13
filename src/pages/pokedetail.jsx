@@ -140,7 +140,7 @@ const PokemonImg = styled.img`
   bottom: 50%;
 `;
 
-function PokeDetail() {
+function PokeDetail({ pokeData }) {
   return (
     <PokeWrapper>
       <ContainerPokemon>
