@@ -53,49 +53,57 @@ function HomePage() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    getPokemon(query).then((data) =>
-      setStatus({ status: "active", data, error: null }).catch(console.log)
-    );
+    getPokemon(query)
+      .then((data) => setStatus({ status: "search", data, error: null }))
+      .catch(console.log);
   }
 
   return (
-    <Container>
-      {/* {status.status === "active" && <PokeDetail pokeData={status.data} />} */}
-      <Containertitle>
-        <TbPokeball style={{ color: "white", width: "30px", height: "30px" }} />
-        <Title>Pokédex</Title>
-      </Containertitle>
-      <SpaceBetweenRow>
-        <SearchWrapper onSubmit={handleSubmit}>
-          <MdSearch
-            style={{
-              width: "16px",
-              height: "16px",
-              color: `${colors.primary}`,
-            }}
+    <>
+      <Container>
+        <Containertitle>
+          <TbPokeball
+            style={{ color: "white", width: "30px", height: "30px" }}
           />
-          <InputSearch
-            type="text"
-            placeholder="pokemon"
-            name="pokemon"
-            onChange={handleChange}
-          />
-          <SearchButton>Search</SearchButton>
-        </SearchWrapper>
-        <button style={{ borderRadius: "50%", border: "none", padding: "8px" }}>
-          AB
-        </button>
-      </SpaceBetweenRow>
-      <ContainerCards>
-        <ContainerWrap>
-          {status.status === "idle" &&
-            pokemons &&
-            pokemons.results.map((pokemon, index) => (
-              <PokeCard key={`poke-${index}`} pokeName={pokemon?.name} />
-            ))}
-        </ContainerWrap>
-      </ContainerCards>
-    </Container>
+          <Title>Pokédex</Title>
+        </Containertitle>
+        <SpaceBetweenRow>
+          <SearchWrapper onSubmit={handleSubmit}>
+            <MdSearch
+              style={{
+                width: "16px",
+                height: "16px",
+                color: `${colors.primary}`,
+              }}
+            />
+            <InputSearch
+              type="text"
+              placeholder="pokemon"
+              name="pokemon"
+              onChange={handleChange}
+            />
+            <SearchButton>Search</SearchButton>
+          </SearchWrapper>
+          <button
+            style={{ borderRadius: "50%", border: "none", padding: "8px" }}
+          >
+            AB
+          </button>
+        </SpaceBetweenRow>
+        <ContainerCards>
+          <ContainerWrap>
+            {status.status === "idle" &&
+              pokemons &&
+              pokemons.results.map((pokemon, index) => (
+                <PokeCard key={`poke-${index}`} pokeName={pokemon?.name} />
+              ))}
+            {status.status === "search" && (
+              <PokeCard pokeName={status.data?.name} />
+            )}
+          </ContainerWrap>
+        </ContainerCards>
+      </Container>
+    </>
   );
 }
 

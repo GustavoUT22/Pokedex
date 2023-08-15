@@ -4,24 +4,28 @@ import { RiHome2Line } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa";
 
 const FooterWrapper = styled.footer`
+  display: flex;
   position: fixed;
   bottom: 0;
-  width: 100%;
-  padding: 10px 0; /* Agregamos un poco de espacio interno para el contenido del footer */
-  height: 10vh;
+  width: a;
+  padding: 10px 15%; /* Agregamos un poco de espacio interno para el contenido del footer */
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => `#${props.footerColor}`};
+  height: 6vh;
+  left: 0;
+  right: 0;
 `;
 
-function Footer() {
+function Footer({ footerColor = "DC0A2D" }) {
   return (
-    <FooterWrapper>
+    <FooterWrapper footerColor={footerColor}>
       <div
         style={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-around",
-          alignItems: "center",
-          maxWidth: "400px",
-          margin: "auto",
+          width: "100%",
+          justifyContent: "space-evenly",
         }}
       >
         <FaRegUser style={{ width: "30px", height: "30px" }} />

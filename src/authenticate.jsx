@@ -7,9 +7,7 @@ import Footer from "./components/footer";
 import styled from "@emotion/styled";
 
 const Main = styled.main`
-  display: grid;
-  grid-template-rows: 1fr auto; /* Cambiamos la altura del footer a "auto" */
-  min-height: 100vh; /* Para asegurarnos de que el contenido ocupe al menos el 100% del alto de la pantalla */
+  margin: auto;
 `;
 
 function AuthenticateApp() {
