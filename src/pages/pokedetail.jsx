@@ -77,8 +77,9 @@ const ContainerTypes = styled.div`
 
 const About = styled.span`
   color: ${(props) => colors.type[props.color]};
+  width: 312px;
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: 16px;
@@ -140,8 +141,64 @@ const PokemonImg = styled.img`
   width: 250px;
   height: 250px;
   position: absolute;
-  left: 30%;
+  left: 21%;
   bottom: 50%;
+`;
+const ContainerStats = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+`;
+
+const StatInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 12px;
+`;
+
+const NameStat = styled.span`
+  color: ${(props) => colors.type[props.color]};
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: right;
+  width: 27px;
+`;
+
+const NameStatsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0px 15px;
+  border-right: 1px solid #e8dede;
+  gap: 8px;
+`;
+
+const NumericStats = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+const WrapperStat = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+`;
+
+const NumberStat = styled.div`
+  width: 19px;
+  color: #1d1d1d;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 160% */
+`;
+const BarStat = styled.div`
+  border-bottom: 4px solid #e8dede;
+  border-radius: 20px;
+  width: 250px;
 `;
 
 function PokeDetail() {
@@ -164,6 +221,8 @@ function PokeDetail() {
       : idStr?.length > 1
       ? `#0${idStr}`
       : `#00${idStr}`;
+
+  const nameStats = ["hp", "atk", "def", "satk", "sdef", "spd"];
 
   return (
     <PokeWrapper color={pokemonData?.types[0].type.name}>
@@ -189,7 +248,7 @@ function PokeDetail() {
               <PokemonType color={ele.type.name}>{ele.type.name}</PokemonType>
             ))}
           </ContainerTypes>
-          <About>About</About>
+          <About color={pokemonData?.types[0].type.name}>About</About>
           <PhysicalData>
             <FlexColumn>
               <WeightData>
@@ -219,16 +278,25 @@ function PokeDetail() {
             iaculis eros vitae tellus condimentum maximus sit amet in eros.
           </div>
           <About color={pokemonData?.types[0].type.name}>Base Stats</About>
-          <div>
-            <div>tipo</div>
-            <div>borde</div>
-            <div>number</div>
-            <div>tipo</div>
-            <div>borde</div>
-            <div>number</div>
-            <div>tipo</div>
-            <div>borde</div>
-          </div>
+          <ContainerStats>
+            <StatInfo>
+              <NameStatsWrapper>
+                {nameStats.map((ele) => (
+                  <NameStat color={pokemonData?.types[0].type.name}>
+                    {ele.toUpperCase()}
+                  </NameStat>
+                ))}
+              </NameStatsWrapper>
+              <NumericStats>
+                {pokemonData?.stats.map((ele) => (
+                  <WrapperStat>
+                    <NumberStat>{ele.base_stat}</NumberStat>
+                    <BarStat />
+                  </WrapperStat>
+                ))}
+              </NumericStats>
+            </StatInfo>
+          </ContainerStats>
         </ContainerDataPoke>
       </ContainerPokemon>
     </PokeWrapper>
@@ -236,4 +304,3 @@ function PokeDetail() {
 }
 
 export default PokeDetail;
-// max stat 250 to have a good user experience

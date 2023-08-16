@@ -15,6 +15,11 @@ export const PokemonType = styled.div`
   align-items: flex-start;
   border-radius: 10px;
   background-color: ${(props) => colors.type[props.color]};
+  color: white;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
 `;
 
 export const Title = styled.h1`
