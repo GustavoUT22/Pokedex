@@ -14,7 +14,7 @@ export const PokemonType = styled.div`
   flex-direction: column;
   align-items: flex-start;
   border-radius: 10px;
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => colors.type[props.color]};
 `;
 
 export const Title = styled.h1`

@@ -6,13 +6,16 @@ import { PokemonType } from "../components/utils";
 import { TbWeight } from "react-icons/tb";
 import { VscSymbolRuler } from "react-icons/vsc";
 import Charmander from "../assets/charmander.png";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getPokemon } from "../services/pokemon-services";
 
 const PokeWrapper = styled.div`
   max-width: 414px;
   margin: auto;
-  height: 100vh;
+  height: 94vh;
   padding: 4px;
-  background-color: ${colors.type.Fire};
+  background-color: ${(props) => colors.type[props.color]};
   position: relative;
 `;
 
@@ -20,7 +23,7 @@ const ContainerPokemon = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 99vh;
+  height: 93vh;
 `;
 
 const PokemonName = styled.div`
@@ -54,7 +57,7 @@ const ContainerHeaderDetail = styled.div`
 const ContainerDataPoke = styled.div`
   display: flex;
   width: 400x;
-  height: 420px;
+  height: auto;
   padding: 56px 20px 0px 20px;
   flex-direction: column;
   align-items: center;
@@ -73,7 +76,7 @@ const ContainerTypes = styled.div`
 `;
 
 const About = styled.span`
-  color: var(--wireframe, #b8b8b8);
+  color: ${(props) => colors.type[props.color]};
   text-align: center;
   font-size: 14px;
   font-style: normal;
@@ -97,6 +100,7 @@ const WeightData = styled.div`
 `;
 
 const Measures = styled.span`
+  display: flex;
   color: ${colors.grayscale.dark};
   text-align: justify;
   font-size: 10px;
@@ -140,42 +144,72 @@ const PokemonImg = styled.img`
   bottom: 50%;
 `;
 
-function PokeDetail({ pokeData }) {
+function PokeDetail() {
+  const [pokemonData, setPokemonData] = useState(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  function handleBack() {
+    navigate("/pokedex");
+  }
+
+  useEffect(() => {
+    getPokemon(id).then(setPokemonData).catch(console.log);
+  }, []);
+
+  const idStr = id.toString();
+  const pokeNumber =
+    idStr?.length > 2
+      ? `#${idStr}`
+      : idStr?.length > 1
+      ? `#0${idStr}`
+      : `#00${idStr}`;
+
   return (
-    <PokeWrapper>
+    <PokeWrapper color={pokemonData?.types[0].type.name}>
       <ContainerPokemon>
-        <ContainerHeaderDetail>
+        <ContainerHeaderDetail onClick={handleBack}>
           <BiArrowBack
             style={{ width: "32px", height: "32px", color: "white" }}
           />
-          <PokemonName>Solcitow</PokemonName>
-          <PokemonNumber>#999</PokemonNumber>
+          <PokemonName>{pokemonData?.name}</PokemonName>
+          <PokemonNumber>{pokeNumber}</PokemonNumber>
         </ContainerHeaderDetail>
-        <PokemonImg src={Charmander} />
+        {pokemonData && (
+          <PokemonImg
+            src={pokemonData?.sprites.other["official-artwork"].front_default}
+            // alt="Pokemon Artwork"
+            onError={(e) => console.error("Error loading image:", e)}
+          />
+        )}
+
         <ContainerDataPoke>
           <ContainerTypes>
-            <PokemonType color={"yellow"}>yellow</PokemonType>
-            <PokemonType color={"yellow"}>yellow</PokemonType>
+            {pokemonData?.types.map((ele) => (
+              <PokemonType color={ele.type.name}>{ele.type.name}</PokemonType>
+            ))}
           </ContainerTypes>
           <About>About</About>
           <PhysicalData>
             <FlexColumn>
               <WeightData>
                 <TbWeight style={{ height: "16px", width: "16px" }} />
-                <Measures>50 k</Measures>
+                <Measures>{pokemonData?.weight}K</Measures>
               </WeightData>
               <NameMeasure>Width</NameMeasure>
             </FlexColumn>
             <FlexColumn>
               <WeightData>
                 <VscSymbolRuler style={{ height: "16px", width: "16px" }} />
-                <Measures>50 k</Measures>
+                <Measures>{pokemonData?.height}cm</Measures>
               </WeightData>
               <NameMeasure>Height</NameMeasure>
             </FlexColumn>
             <FlexColumn>
               <WeightData>
-                <Measures>Abulity 1</Measures>
+                {pokemonData?.abilities.map((ele, index) => (
+                  <Measures key={`index-${index}`}>{ele.ability.name}</Measures>
+                ))}
               </WeightData>
               <NameMeasure>Moves</NameMeasure>
             </FlexColumn>
@@ -184,12 +218,16 @@ function PokeDetail({ pokeData }) {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             iaculis eros vitae tellus condimentum maximus sit amet in eros.
           </div>
-          <About>Base Stats</About>
+          <About color={pokemonData?.types[0].type.name}>Base Stats</About>
           <div>
             <div>tipo</div>
             <div>borde</div>
             <div>number</div>
-            <div>estadistica</div>
+            <div>tipo</div>
+            <div>borde</div>
+            <div>number</div>
+            <div>tipo</div>
+            <div>borde</div>
           </div>
         </ContainerDataPoke>
       </ContainerPokemon>
@@ -198,3 +236,4 @@ function PokeDetail({ pokeData }) {
 }
 
 export default PokeDetail;
+// max stat 250 to have a good user experience

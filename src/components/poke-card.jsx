@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { colors } from "../styles/colors";
 import PokeBackground from "../assets/pokebackground.png";
-import { useAsyncError, useSearchParams } from "react-router-dom";
+import { useAsyncError, useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getPokemon } from "../services/pokemon-services";
 
@@ -67,10 +67,11 @@ const PokeCardName = styled.div`
 
 function PokeCard({ pokeName }) {
   const [pokemon, setPokemon] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getPokemon(pokeName).then(setPokemon).catch(console.log);
-  }, []);
+  }, [pokeName]);
 
   const idStr = pokemon?.id.toString();
   const pokeNumber =
@@ -79,8 +80,13 @@ function PokeCard({ pokeName }) {
       : idStr?.length > 1
       ? `#0${idStr}`
       : `#00${idStr}`;
+
+  function handleClick(id) {
+    navigate(`/pokedex/${id}`);
+  }
+
   return (
-    <PokeCardWrapper>
+    <PokeCardWrapper onClick={() => handleClick(pokemon.id)}>
       <PokeCardNumber>
         <PokeNumber>{pokeNumber}</PokeNumber>
       </PokeCardNumber>
