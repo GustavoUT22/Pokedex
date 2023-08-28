@@ -17,21 +17,22 @@ const FooterWrapper = styled.footer`
   right: 0;
 `;
 
-function Footer({ footerColor = "DC0A2D" }) {
+const IconsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  gap: 80px;
+`;
+
+function Footer({ footerColor = "gray" }) {
   return (
     <FooterWrapper footerColor={footerColor}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          width: "100%",
-          justifyContent: "space-evenly",
-        }}
-      >
+      <IconsWrapper>
         <FaRegUser style={{ width: "30px", height: "30px" }} />
         <RiHome2Line style={{ width: "30px", height: "30px" }} />
         <MdFavoriteBorder style={{ width: "30px", height: "30px" }} />
-      </div>
+      </IconsWrapper>
     </FooterWrapper>
   );
 }

@@ -110,18 +110,6 @@ const Measures = styled.span`
   line-height: 16px;
 `;
 
-const HeightData = styled.div`
-  display: flex;
-  align-items: center;
-  height: 48px;
-`;
-
-const MovesData = styled.div`
-  display: flex;
-  align-items: center;
-  height: 48px;
-`;
-
 const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
@@ -138,23 +126,24 @@ const NameMeasure = styled.span`
 `;
 
 const PokemonImg = styled.img`
-  width: 250px;
-  height: 250px;
+  width: 280px;
+  height: 280px;
   position: absolute;
-  left: 21%;
+  left: 20%;
   bottom: 50%;
 `;
 const ContainerStats = styled.div`
   display: flex;
   flex-direction: column;
   align-self: stretch;
+  padding: 16px 8px;
 `;
 
 const StatInfo = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   gap: 12px;
+  justify-content: space-evenly;
 `;
 
 const NameStat = styled.span`
@@ -164,13 +153,12 @@ const NameStat = styled.span`
   font-weight: 700;
   line-height: 16px;
   text-align: right;
-  width: 27px;
 `;
 
 const NameStatsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0px 15px;
+  padding: 0px 25px 0px 2px;
   border-right: 1px solid #e8dede;
   gap: 8px;
 `;
@@ -179,12 +167,15 @@ const NumericStats = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  /* width: 100%; */
 `;
 const WrapperStat = styled.div`
   display: flex;
   flex-direction: row;
   gap: 16px;
   align-items: center;
+  width: 100%;
+  flex-grow: 1;
 `;
 
 const NumberStat = styled.div`
@@ -195,10 +186,22 @@ const NumberStat = styled.div`
   font-weight: 400;
   line-height: 16px; /* 160% */
 `;
-const BarStat = styled.div`
-  border-bottom: 4px solid #e8dede;
-  border-radius: 20px;
-  width: 250px;
+
+const FilledBar = styled.progress`
+  display: flex;
+  height: 10px;
+  appearance: none;
+
+  ::-webkit-progress-value {
+    background-color: ${(props) =>
+      colors.type[props.color]}; /* Color de progreso */
+    border-radius: 20px;
+  }
+
+  ::-webkit-progress-bar {
+    background-color: #e8dede; /* Color de fondo */
+    border-radius: 20px;
+  }
 `;
 
 function PokeDetail() {
@@ -291,7 +294,14 @@ function PokeDetail() {
                 {pokemonData?.stats.map((ele) => (
                   <WrapperStat>
                     <NumberStat>{ele.base_stat}</NumberStat>
-                    <BarStat />
+
+                    <FilledBar
+                      max="255"
+                      value={ele.base_stat}
+                      color={pokemonData?.types[0].type.name}
+                    >
+                      {((ele.base_stat / 255) * 100).toFixed(1)}%
+                    </FilledBar>
                   </WrapperStat>
                 ))}
               </NumericStats>
