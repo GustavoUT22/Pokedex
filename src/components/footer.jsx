@@ -11,7 +11,7 @@ const FooterWrapper = styled.footer`
   padding: 10px 15%; /* Agregamos un poco de espacio interno para el contenido del footer */
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => `#${props.footerColor}`};
+  background-color: #beafc2;
   height: 6vh;
   left: 0;
   right: 0;
@@ -25,9 +25,9 @@ const IconsWrapper = styled.div`
   gap: 80px;
 `;
 
-function Footer({ footerColor = "gray" }) {
+function Footer() {
   return (
-    <FooterWrapper footerColor={footerColor}>
+    <FooterWrapper>
       <IconsWrapper>
         <FaRegUser style={{ width: "30px", height: "30px" }} />
         <RiHome2Line style={{ width: "30px", height: "30px" }} />

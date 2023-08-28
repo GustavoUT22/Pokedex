@@ -18,6 +18,7 @@ import PokeCard from "../components/poke-card";
 import PokeDetail from "./pokedetail";
 import { useEffect, useState } from "react";
 import { getPokemon, getPokemons } from "../services/pokemon-services";
+import ButtonSort from "../components/button-sort";
 
 const SearchButton = styled.button`
   border: none;
@@ -84,11 +85,7 @@ function HomePage() {
             />
             <SearchButton>Search</SearchButton>
           </SearchWrapper>
-          <button
-            style={{ borderRadius: "50%", border: "none", padding: "8px" }}
-          >
-            AB
-          </button>
+          <ButtonSort />
         </SpaceBetweenRow>
         <ContainerCards>
           <ContainerWrap>

@@ -8,6 +8,7 @@ import styled from "@emotion/styled";
 
 const Main = styled.main`
   margin: auto;
+  background: linear-gradient(to top, #beafc2, #695e93, #8155ba, #281c2d);
 `;
 
 function AuthenticateApp() {

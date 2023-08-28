@@ -230,9 +230,15 @@ function PokeDetail() {
   return (
     <PokeWrapper color={pokemonData?.types[0].type.name}>
       <ContainerPokemon>
-        <ContainerHeaderDetail onClick={handleBack}>
+        <ContainerHeaderDetail>
           <BiArrowBack
-            style={{ width: "32px", height: "32px", color: "white" }}
+            onClick={handleBack}
+            style={{
+              width: "32px",
+              height: "32px",
+              color: "white",
+              cursor: "pointer",
+            }}
           />
           <PokemonName>{pokemonData?.name}</PokemonName>
           <PokemonNumber>{pokeNumber}</PokemonNumber>
